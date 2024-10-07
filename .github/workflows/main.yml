@@ -20,7 +20,7 @@ jobs:
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
         source: "."
-        target: "/var/www/html/repo"
+        target: "/var/www/html/FlareProjetoAWS/"
 
     - name: Restart Nginx Server
       uses: appleboy/ssh-action@v0.1.1
