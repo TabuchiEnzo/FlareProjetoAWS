@@ -13,6 +13,9 @@ jobs:
     - name: Check out the repository
       uses: actions/checkout@v2
 
+    - name: Set Permissions for SSH Key
+      run: chmod 600 ${{ secrets.EC2_SSH_KEY }}
+
     - name: Restart Nginx Server
       uses: appleboy/ssh-action@v0.1.1
       with:
@@ -21,3 +24,4 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
           sudo systemctl restart nginx
+        debug: true
