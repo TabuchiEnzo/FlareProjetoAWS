@@ -1,1 +1,24 @@
+name: Deploy no EC2
 
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Deploy to EC2
+        run: |
+          echo "${{secrets.KEY_G}}" > private_key && chmod 600 private_key
+          ssh -o StrictHostkeyChecking=no -i private_key ubuntu@ec2-184-73-11-122.compute-1.amazonaws.com "
+                cd /var/www/html/FlareProjetoAWS &&
+                sudo git pull "
